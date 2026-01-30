@@ -1,0 +1,17 @@
+Title Name : 
+Application Maintenance Issue Diagnosis Agent
+
+Problem Statement :
+Maintenance teams face challenges diagnosing application issues quickly due to scattered logs and documentation.
+
+Steps :
+Build a generative AI agent that helps diagnose issue based on error messages and logs. Use sample error logs and troubleshooting guides.
+Enable the agent to suggest possible causes and solutions.
+Validate with sample error scenarios.
+
+Data Requirements:
+Error logs, troubleshooting documentations.
+Sample Input : application crashes with error code 500.
+
+Expected output :
+Textual diagnostic suggestions and recommended actions.
