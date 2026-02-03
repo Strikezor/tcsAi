@@ -1,0 +1,194 @@
+https://www.tribe.ai/applied-ai/legacy-code-modernization-with-claude-code-breaking-through-context-window-barriers
+TCS AI Fridays Hackathon
+Title:
+
+Legacy Codebase Modernization Suggestion Agent
+
+Problem Statement:
+
+Modernizing legacy software systems is essential but challenging due to outdated code, lack of documentation, and complex dependencies. Manual analysis for refactoring and migration is labor-intensive and error-prone.
+A generative AI agent can analyze legacy code snippets and suggest modernization strategies, code refactoring, and updated design patterns to accelerate modernization efforts.
+
+Data Requirements:
+
+Sample legacy codebases in languages such as Java, COBOL, or Python 2, along with documentation on modern equivalents or best practices. Include code snippets representing common legacy patterns and anti-patterns.
+Data should be structured for parsing and analysis.
+
+(Feel free to generate synthetic data as well from the provided access.)
+
+Expected Output:
+
+A tool that generates textual modernization reports and annotated code suggestions highlighting changes.
+Outputs should be exportable as Markdown or PDF and include rationale for each recommendation.
+Deliverables include:
+
+Code
+
+Test inputs
+
+Example modernization reports
+
+Be creative to go beyond as you solve the above needs.ac
+
+
+
+Perfect — let’s sketch out a **workflow architecture** for using generative AI to modernize legacy software systems. This pipeline combines **retrieval (RAG)**, **reasoning models**, and **code generation models** so you can tackle outdated codebases effectively.
+
+---
+
+## 🏗️ Modernization Pipeline Architecture
+
+### 1. **Data Ingestion**
+- **Input sources**: Legacy codebases (COBOL, Java, C++, etc.), documentation (if available), dependency graphs.
+- **Preprocessing**:
+  - Parse code into ASTs (Abstract Syntax Trees).
+  - Extract comments, metadata, and dependency structures.
+  - Store chunks in a vector database.
+
+👉 **Model used**:  
+- **`azure/genailab-maas-text-embedding-3-large`** → generates embeddings for semantic search across code snippets.
+
+---
+
+### 2. **Retrieval Layer (RAG)**
+- Query legacy codebase for relevant snippets when analyzing modernization tasks.
+- Use embeddings to find similar functions, modules, or design patterns.
+
+👉 **Tooling**:  
+- **Chroma / FAISS** for vector storage.  
+- Retriever fetches relevant code snippets for analysis.
+
+---
+
+### 3. **Reasoning & Analysis**
+- Deep reasoning models analyze:
+  - Outdated constructs (e.g., procedural loops, manual memory management).
+  - Dependency chains and architectural bottlenecks.
+  - Missing documentation inferred from code behavior.
+
+👉 **Models used**:  
+- **`azure_ai/genailab-maas-DeepSeek-V3-0324`** → strong logical reasoning for dependency analysis.  
+- **`azure_ai/genailab-maas-Phi-4-reasoning`** → lightweight reasoning for design pattern recommendations.
+
+---
+
+### 4. **Code Refactoring & Generation**
+- Suggest modern equivalents:
+  - Replace legacy APIs with modern frameworks.
+  - Introduce OOP or microservices design patterns.
+  - Generate updated code snippets in target languages (Java, Python, C#, etc.).
+
+👉 **Model used**:  
+- **`azure/genailab-maas-gpt-4o`** → best for **code generation + modernization strategies**.  
+- Can produce refactored code, migration guides, and documentation.
+
+---
+
+### 5. **Validation & Testing**
+- AI suggests unit tests for refactored code.
+- Ensures backward compatibility with legacy system requirements.
+- Generates migration checklists.
+
+👉 **Model used**:  
+- **`gpt-4o`** for test case generation.  
+- Optional: **Llama-3.3-70B-Instruct** if you want open-weight style large-scale validation.
+
+---
+
+## 🔄 End-to-End Flow
+
+1. **Upload legacy codebase** → embeddings created.  
+2. **Query system** → retrieves relevant snippets via RAG.  
+3. **Reasoning models (DeepSeek / Phi)** → analyze dependencies & modernization strategies.  
+4. **Code generation model (GPT-4o)** → outputs refactored code + migration plan.  
+5. **Validation** → AI generates test cases & documentation.  
+
+---
+
+## 🎯 Recommended Stack for You
+- **Embeddings**: `text-embedding-3-large`  
+- **Reasoning**: `DeepSeek-V3-0324` + `Phi-4-reasoning`  
+- **Code generation**: `gpt-4o`  
+- **Storage**: Chroma or FAISS for vector DB  
+- **Frontend**: Streamlit (like your PDF summarizer app)  
+
+---
+
+Would you like me to **draw this workflow as a diagram** (boxes + arrows showing data flow) so it’s easier to visualize how the models interact?
+
+
+
+
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class AddTwoNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Prompt user for first number
+            System.out.print("Enter the first number: ");
+            double num1 = scanner.nextDouble();
+
+            // Prompt user for second number
+            System.out.print("Enter the second number: ");
+            double num2 = scanner.nextDouble();
+
+            // Calculate sum
+            double sum = num1 + num2;
+
+            // Display result
+            System.out.println("The sum of " + num1 + " and " + num2 + " is: " + sum);
+
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter numeric values only.");
+        } finally {
+            scanner.close(); // Always close the scanner
+        }
+    }
+}
+
+
+
+25:-
+
+
+import java.util.Scanner;
+
+public class AddTwoNumbers {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        try {
+            // Prompt user for first number
+            System.out.print("Enter the first number: ");
+            if (!scanner.hasNextDouble()) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                return;
+            }
+            double num1 = scanner.nextDouble();
+
+            // Prompt user for second number
+            System.out.print("Enter the second number: ");
+            if (!scanner.hasNextDouble()) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                return;
+            }
+            double num2 = scanner.nextDouble();
+
+            // Calculate sum
+            double sum = num1 + num2;
+
+            // Display result
+            System.out.printf("The sum of %.2f and %.2f is: %.2f%n", num1, num2, sum);
+
+        } catch (Exception e) {
+            System.out.println("An unexpected error occurred: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
+
