@@ -1,0 +1,151 @@
+Investment_ID,Asset_Class,Investment_Name,Investment_Mode,Location,Investment_Date,Initial_Amount,Current_Balance,ROI_Percentage,Risk_Profile,Status
+INV001,Equity,N/A,SIP,India,2019-03-12,12000,18500,54.17,High,Active
+INV002,Debt,N/A,Lump Sum,US,2018-06-20,25000,28500,14.00,Low,Active
+INV003,Crypto,N/A,Lump Sum,Global,2021-11-10,5000,1200,-76.00,High,Active
+INV004,Real Estate,N/A,Lump Sum,Europe,2018-01-15,50000,62000,24.00,Medium,Active
+INV005,Gold,N/A,Lump Sum,India,2020-05-22,10000,14200,42.00,Low,Active
+INV006,Equity,N/A,IPO,US,2024-01-15,15000,15000,0.00,High,Active
+INV007,Debt,N/A,SIP,Europe,2020-09-30,8000,8600,7.50,Low,Redeemed
+INV008,Equity,N/A,SIP,Emerging Markets,2022-03-14,20000,21500,7.50,Medium,Active
+INV009,Crypto,N/A,Lump Sum,Global,2024-01-10,3000,2800,-6.67,High,Active
+INV010,Real Estate,N/A,Lump Sum,US,2019-11-05,45000,51000,13.33,Medium,Active
+INV011,Gold,N/A,SIP,India,2021-02-18,5000,6100,22.00,Low,Active
+INV012,Equity,N/A,Lump Sum,India,2023-06-25,12000,13800,15.00,High,Active
+INV013,Debt,N/A,Lump Sum,Emerging Markets,2018-12-12,30000,31000,3.33,Low,Redeemed
+INV014,Equity,N/A,SIP,US,2020-07-20,15000,22000,46.67,High,Active
+INV015,Crypto,N/A,Lump Sum,Global,2023-12-01,2000,1800,-10.00,High,Active
+INV016,Real Estate,N/A,Lump Sum,India,2018-04-10,48000,72000,50.00,Medium,Active
+INV017,Gold,N/A,Lump Sum,Europe,2019-08-15,15000,19500,30.00,Low,Active
+INV018,Debt,N/A,SIP,US,2021-10-10,6000,6300,5.00,Low,Active
+INV019,Equity,N/A,IPO,India,2021-05-05,25000,45000,80.00,High,Active
+INV020,Equity,N/A,SIP,Europe,2022-11-20,10000,11200,12.00,Medium,Active
+INV021,Crypto,N/A,Lump Sum,Global,2021-04-12,4000,900,-77.50,High,Redeemed
+INV022,Debt,N/A,Lump Sum,India,2019-01-25,20000,23000,15.00,Low,Active
+INV023,Real Estate,N/A,Lump Sum,Emerging Markets,2020-03-30,40000,44000,10.00,High,Active
+INV024,Gold,N/A,SIP,US,2023-02-14,7000,7700,10.00,Low,Active
+INV025,Equity,N/A,Lump Sum,Europe,2020-12-12,18000,24000,33.33,High,Active
+INV026,Equity,N/A,SIP,India,2024-01-28,5000,5050,1.00,Medium,Active
+INV027,Debt,N/A,Lump Sum,US,2018-09-05,35000,38000,8.57,Low,Active
+INV028,Crypto,N/A,Lump Sum,Global,2022-06-18,1000,1500,50.00,High,Active
+INV029,Real Estate,N/A,Lump Sum,Europe,2021-08-22,50000,55000,10.00,Medium,Active
+INV030,Gold,N/A,Lump Sum,Emerging Markets,2019-02-10,12000,16000,33.33,Low,Active
+INV031,Equity,N/A,IPO,India,2023-09-15,22000,20000,-9.09,High,Active
+INV032,Debt,N/A,SIP,India,2020-01-20,9000,9900,10.00,Low,Active
+INV033,Equity,N/A,SIP,US,2018-11-11,14000,26000,85.71,High,Active
+INV034,Crypto,N/A,Lump Sum,Global,2023-05-05,5000,4200,-16.00,High,Active
+INV035,Real Estate,N/A,Lump Sum,US,2022-01-10,42000,43000,2.38,Medium,Active
+INV036,Gold,N/A,SIP,Europe,2021-07-07,3000,3600,20.00,Low,Active
+INV037,Equity,N/A,Lump Sum,Emerging Markets,2019-06-30,11000,13500,22.73,High,Active
+INV038,Debt,N/A,Lump Sum,Europe,2018-05-15,28000,29000,3.57,Low,Redeemed
+INV039,Equity,N/A,SIP,India,2020-10-10,16000,24000,50.00,Medium,Active
+INV040,Crypto,N/A,Lump Sum,Global,2024-02-01,2000,2000,0.00,High,Active
+INV041,Real Estate,N/A,Lump Sum,India,2019-04-25,38000,52000,36.84,Medium,Active
+INV042,Gold,N/A,Lump Sum,US,2022-04-18,13000,15000,15.38,Low,Active
+INV043,Equity,N/A,IPO,Europe,2021-12-12,19000,21000,10.53,High,Active
+INV044,Debt,N/A,SIP,Emerging Markets,2023-08-01,7000,7100,1.43,Low,Active
+INV045,Equity,N/A,SIP,US,2019-07-07,13000,21000,61.54,High,Active
+INV046,Crypto,N/A,Lump Sum,Global,2020-02-20,8000,35000,337.50,High,Active
+INV047,Real Estate,N/A,Lump Sum,Emerging Markets,2018-10-30,46000,49000,6.52,Medium,Active
+INV048,Gold,N/A,SIP,India,2024-01-05,4000,4100,2.50,Low,Active
+INV049,Debt,N/A,Lump Sum,India,2022-05-14,26000,27500,5.77,Low,Active
+INV050,Equity,N/A,Lump Sum,US,2023-11-20,17000,18500,8.82,Medium,Active
+INV051,Equity,NVIDIA Corp (NVDA),Lump Sum,US,2023-01-12,15000,42000,180.00,High,Active
+INV052,Equity,Apple Inc (AAPL),SIP,US,2020-03-20,12000,18500,54.17,Medium,Active
+INV053,Equity,Reliance Industries Ltd,Lump Sum,India,2019-08-15,25000,38000,52.00,Medium,Active
+INV054,Equity,HDFC Bank Ltd,SIP,India,2021-06-10,10000,11500,15.00,Low,Active
+INV055,Equity,ASML Holding NV,Lump Sum,Europe,2022-02-14,30000,41000,36.67,High,Active
+INV056,Equity,Tencent Holdings,Lump Sum,Emerging Markets,2021-01-25,20000,14000,-30.00,High,Active
+INV057,Mutual Fund,Parag Parikh Flexi Cap Fund,SIP,India,2019-05-12,18000,32000,77.78,Medium,Active
+INV058,Mutual Fund,Mirae Asset NYSE FANG+ ETF,Lump Sum,Global,2023-11-10,5000,8200,64.00,High,Active
+INV059,Mutual Fund,Vanguard S&P 500 ETF (VOO),Lump Sum,US,2018-04-15,40000,68000,70.00,Low,Active
+INV060,Mutual Fund,SBI Small Cap Fund,SIP,India,2020-12-05,9000,15500,72.22,High,Active
+INV061,Mutual Fund,Quant Active Fund,Lump Sum,India,2022-07-22,12000,16800,40.00,High,Active
+INV062,Mutual Fund,ICICI Pru US Bluechip Equity,SIP,US,2021-09-30,6000,7800,30.00,Medium,Active
+INV063,Mutual Fund,HDFC Balanced Advantage Fund,Lump Sum,India,2018-11-20,35000,51000,45.71,Low,Active
+INV064,Debt,Government of India 7.26% GS 2033,Lump Sum,India,2023-05-15,20000,21400,7.00,Low,Active
+INV065,Debt,US Treasury 10Y Note,Lump Sum,US,2024-01-15,50000,50000,0.00,Low,Active
+INV066,Debt,Aditya Birla SL Corporate Bond,SIP,India,2020-02-18,15000,17200,14.67,Low,Active
+INV067,Crypto,Bitcoin (BTC),Lump Sum,Global,2024-01-20,10000,11200,12.00,High,Active
+INV068,Crypto,Ethereum (ETH),SIP,Global,2022-05-10,5000,5800,16.00,High,Active
+INV069,Crypto,Solana (SOL),Lump Sum,Global,2023-10-01,2000,4500,125.00,High,Active
+INV070,Real Estate,REIT - Vanguard Real Estate,Lump Sum,US,2019-03-30,25000,28500,14.00,Medium,Active
+INV071,Real Estate,Brookfield India REIT,Lump Sum,India,2021-04-12,15000,16200,8.00,Medium,Active
+INV072,Gold,Sovereign Gold Bond 2023-24,Lump Sum,India,2023-12-20,10000,10800,8.00,Low,Active
+INV073,Gold,SPDR Gold Shares (GLD),Lump Sum,US,2018-09-05,20000,31000,55.00,Low,Active
+INV074,Equity,Tesla Inc (TSLA),Lump Sum,US,2021-11-04,15000,10500,-30.00,High,Active
+INV075,Equity,Infosys Ltd,SIP,India,2020-07-25,12000,17500,45.83,Medium,Active
+INV076,Mutual Fund,Axis Midcap Fund,SIP,India,2019-01-10,14000,22000,57.14,Medium,Active
+INV077,Mutual Fund,Motilal Oswal Nasdaq 100 FOF,Lump Sum,Global,2024-01-28,8000,8000,0.00,High,Active
+INV078,Equity,LVMH Moet Hennessy,Lump Sum,Europe,2022-03-14,25000,29000,16.00,Medium,Active
+INV079,Equity,TSMC (TSM),Lump Sum,Emerging Markets,2023-06-05,10000,16500,65.00,High,Active
+INV080,Mutual Fund,Nippon India Small Cap Fund,SIP,India,2021-08-20,7000,12000,71.43,High,Active
+INV081,Mutual Fund,Franklin India Prima Fund,SIP,India,2018-05-30,15000,21000,40.00,Medium,Active
+INV082,Debt,NTPC Tax Free Bonds,Lump Sum,India,2018-02-15,30000,34500,15.00,Low,Active
+INV083,Equity,Microsoft (MSFT),SIP,US,2020-10-10,10000,19500,95.00,Medium,Active
+INV084,Equity,Amazon.com Inc (AMZN),Lump Sum,US,2021-07-15,12000,13200,10.00,High,Active
+INV085,Mutual Fund,Canara Robeco Bluechip Equity,SIP,India,2021-12-01,9000,10800,20.00,Low,Active
+INV086,Crypto,Cardano (ADA),Lump Sum,Global,2021-09-10,4000,800,-80.00,High,Active
+INV087,Equity,Tata Motors Ltd,Lump Sum,India,2020-04-20,15000,48000,220.00,High,Active
+INV088,Equity,SAP SE,Lump Sum,Europe,2019-12-12,22000,31000,40.91,Medium,Active
+INV089,Mutual Fund,Edelweiss Greater China Equity,Lump Sum,Emerging Markets,2021-02-25,10000,6500,-35.00,High,Active
+INV090,Real Estate,Public Storage (PSA),Lump Sum,US,2018-07-07,35000,42000,20.00,Medium,Active
+INV091,Gold,Gold BeES ETF,SIP,India,2022-09-15,5000,6200,24.00,Low,Active
+INV092,Debt,Vanguard Total Bond Market,Lump Sum,US,2023-01-10,25000,26500,6.00,Low,Active
+INV093,Equity,Alphabet Inc (GOOGL),SIP,US,2019-06-30,18000,33000,83.33,Medium,Active
+INV094,Equity,ICICI Bank Ltd,SIP,India,2020-11-15,11000,18500,68.18,Medium,Active
+INV095,Mutual Fund,UTI Nifty 50 Index Fund,SIP,India,2021-03-10,12000,15500,29.17,Low,Active
+INV096,Mutual Fund,Kotak Emerging Equity Fund,Lump Sum,India,2019-09-22,20000,36000,80.00,High,Active
+INV097,Equity,Berkshire Hathaway (BRK.B),Lump Sum,US,2018-01-10,45000,75000,66.67,Low,Active
+INV098,Crypto,Polkadot (DOT),Lump Sum,Global,2021-05-18,3000,900,-70.00,High,Active
+INV099,Equity,Siemens AG,Lump Sum,Europe,2020-08-14,28000,39000,39.29,Medium,Active
+INV100,Debt,HDFC Medium Term Debt Fund,SIP,India,2022-04-05,8000,8800,10.00,Low,Active
+INV101,Equity,Meta Platforms Inc (META),Lump Sum,US,2022-11-15,15000,48000,220.00,High,Active
+INV102,Equity,Adani Green Energy,Lump Sum,India,2020-06-10,10000,45000,350.00,High,Active
+INV103,Mutual Fund,PGIM India Midcap Opp Fund,SIP,India,2021-02-28,12000,17000,41.67,High,Active
+INV104,Equity,AIA Group Ltd,Lump Sum,Emerging Markets,2019-04-12,20000,18500,-7.50,Medium,Active
+INV105,Equity,Novo Nordisk (NVO),Lump Sum,Europe,2021-10-05,30000,58000,93.33,Medium,Active
+INV106,Mutual Fund,Tata Digital India Fund,SIP,India,2020-03-25,9000,16500,83.33,High,Active
+INV107,Debt,ICICI Pru All Seasons Bond,Lump Sum,India,2023-08-15,40000,42800,7.00,Low,Active
+INV108,Gold,DSP World Gold Fund,Lump Sum,Global,2019-07-20,15000,24500,63.33,High,Active
+INV109,Real Estate,Embassy Office Parks REIT,SIP,India,2020-09-10,7000,7800,11.43,Medium,Active
+INV110,Equity,Advanced Micro Devices (AMD),Lump Sum,US,2023-04-01,12000,19000,58.33,High,Active
+INV111,Equity,Asian Paints Ltd,SIP,India,2018-12-15,18000,26000,44.44,Low,Active
+INV112,Equity,TotalEnergies SE,Lump Sum,Europe,2022-01-20,22000,25000,13.64,Medium,Active
+INV113,Mutual Fund,Kotak US Specific Equity,Lump Sum,US,2024-01-05,10000,10500,5.00,Medium,Active
+INV114,Crypto,Chainlink (LINK),Lump Sum,Global,2022-08-18,5000,6200,24.00,High,Active
+INV115,Equity,JD.com Inc,Lump Sum,Emerging Markets,2021-06-30,15000,9000,-40.00,High,Active
+INV116,Debt,Franklin India Low Duration,SIP,India,2019-02-14,25000,27000,8.00,Low,Redeemed
+INV117,Equity,Visa Inc (V),SIP,US,2020-05-22,14000,19500,39.29,Low,Active
+INV118,Equity,Sun Pharmaceutical,Lump Sum,India,2021-11-10,12000,17500,45.83,Medium,Active
+INV119,Mutual Fund,Invesco India Contra Fund,SIP,India,2019-10-05,10000,16500,65.00,Medium,Active
+INV120,Gold,S&P Physical Gold ETF,Lump Sum,Global,2023-02-14,20000,22500,12.50,Low,Active
+INV121,Equity,Broadcom Inc (AVGO),Lump Sum,US,2023-09-12,25000,38000,52.00,High,Active
+INV122,Equity,Maruti Suzuki India,SIP,India,2018-08-20,30000,42000,40.00,Medium,Active
+INV123,Mutual Fund,Nippon India Multi Cap Fund,Lump Sum,India,2020-01-15,15000,24500,63.33,Medium,Active
+INV124,Debt,Nippon India Liquid Fund,Lump Sum,India,2024-01-30,50000,50200,0.40,Low,Active
+INV125,Equity,Eli Lilly & Co (LLY),Lump Sum,US,2022-05-18,20000,48000,140.00,Medium,Active
+INV126,Equity,Bayerische Motoren Werke (BMW),Lump Sum,Europe,2019-03-05,18000,21000,16.67,Medium,Active
+INV127,Mutual Fund,Bandhan Small Cap Fund,SIP,India,2021-12-12,11000,19500,77.27,High,Active
+INV128,Equity,Petrobras,Lump Sum,Emerging Markets,2020-11-25,15000,18500,23.33,High,Active
+INV129,Crypto,Avalanche (AVAX),Lump Sum,Global,2023-12-05,3000,4200,40.00,High,Active
+INV130,Real Estate,Realty Income Corp (O),SIP,US,2018-04-10,22000,26500,20.45,Low,Active
+INV131,Equity,Netflix Inc (NFLX),Lump Sum,US,2022-07-20,15000,27000,80.00,High,Active
+INV132,Equity,Axis Bank Ltd,SIP,India,2020-12-15,13000,21000,61.54,Medium,Active
+INV133,Mutual Fund,SBI Bluechip Fund,Lump Sum,India,2019-06-10,40000,58000,45.00,Low,Active
+INV134,Debt,US 2-Year Treasury,Lump Sum,US,2023-10-01,35000,36200,3.43,Low,Active
+INV135,Equity,Adobe Inc (ADBE),SIP,US,2021-03-22,12000,14500,20.83,High,Active
+INV136,Equity,Titan Company Ltd,Lump Sum,India,2018-10-30,10000,32000,220.00,Medium,Active
+INV137,Mutual Fund,DSP Midcap Fund,SIP,India,2020-08-05,15000,24000,60.00,Medium,Active
+INV138,Equity,Unilever PLC,Lump Sum,Europe,2019-05-15,25000,28500,14.00,Low,Active
+INV139,Equity,Baidu Inc,Lump Sum,Emerging Markets,2021-02-10,20000,11000,-45.00,High,Active
+INV140,Gold,Axis Gold ETF,SIP,India,2024-01-12,5000,5000,0.00,Low,Active
+INV141,Equity,JPMorgan Chase (JPM),Lump Sum,US,2022-01-25,30000,41000,36.67,Low,Active
+INV142,Equity,State Bank of India,SIP,India,2020-04-12,18000,38000,111.11,Medium,Active
+INV143,Mutual Fund,HDFC Small Cap Fund,Lump Sum,India,2021-09-05,12000,21000,75.00,High,Active
+INV144,Debt,Kotak Bond Short Term,SIP,India,2019-11-20,20000,23000,15.00,Low,Active
+INV145,Equity,Salesforce Inc (CRM),Lump Sum,US,2023-05-15,15000,22500,50.00,High,Active
+INV146,Equity,Bharti Airtel Ltd,SIP,India,2021-07-22,11000,18500,68.18,Medium,Active
+INV147,Mutual Fund,Motilal Oswal Midcap Fund,Lump Sum,India,2020-02-28,25000,48000,92.00,High,Active
+INV148,Crypto,Ripple (XRP),Lump Sum,Global,2024-02-05,5000,5100,2.00,High,Active
+INV149,Equity,Schneider Electric,Lump Sum,Europe,2021-12-12,28000,36000,28.57,Medium,Active
+INV150,Debt,Vanguard Total Intl Bond,Lump Sum,Global,2023-03-30,45000,46800,4.00,Low,Active

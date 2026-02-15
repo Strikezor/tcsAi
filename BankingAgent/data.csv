@@ -1,0 +1,101 @@
+Account_ID,Account_Holder,Account_Type,Current_Balance,Credit_Score,Outstanding_Loan_Amount,Loan_Type,Last_Transaction_Date,Branch_Location
+1001,John Doe,Business,950000.00,420,0.00,None,2026-01-15,New York
+1002,Jane Smith,Savings,12450.50,780,250000.00,Mortgage,2026-02-10,London
+1003,Michael Chen,Checking,-150.25,550,5000.00,Personal,2026-02-11,Mumbai
+1004,Sarah Johnson,Savings,45000.00,810,0.00,None,2026-01-30,Berlin
+1005,Robert Brown,Business,0.00,620,15000.00,Auto,2026-02-05,New York
+1006,Emily Davis,Checking,2300.75,710,310000.00,Mortgage,2026-02-08,London
+1007,David Wilson,Savings,890.00,640,0.00,None,2026-01-20,Mumbai
+1008,Linda Taylor,Business,-450.00,510,12000.00,Personal,2026-02-12,Berlin
+1009,James Miller,Checking,15600.40,745,420000.00,Mortgage,2026-01-25,New York
+1010,Patricia Garcia,Savings,340.50,590,8000.00,Auto,2026-02-02,Mumbai
+1011,Christopher Lee,Business,120.00,310,0.00,None,2026-01-18,London
+1012,Barbara Martinez,Checking,5600.00,680,0.00,None,2026-02-09,Berlin
+1013,Matthew Robinson,Savings,89000.00,820,4500.00,Personal,2026-01-12,New York
+1014,Jennifer Clark,Business,1250.00,700,0.00,None,2026-02-11,Mumbai
+1015,Daniel Rodriguez,Checking,15.25,450,22000.00,Auto,2026-02-03,London
+1016,Elizabeth Lewis,Savings,6700.80,790,0.00,None,2026-01-28,Berlin
+1017,Anthony Walker,Business,450000.00,840,0.00,None,2026-02-01,New York
+1018,Susan Hall,Checking,2100.00,615,0.00,None,2026-01-14,Mumbai
+1019,Mark Young,Savings,75.00,350,1500.00,Personal,2026-02-10,London
+1020,Jessica Allen,Business,12000.00,725,35000.00,Auto,2026-02-07,Berlin
+1021,Paul Wright,Checking,430.00,580,0.00,None,2026-01-22,New York
+1022,Karen King,Savings,5400.00,760,0.00,None,2026-02-06,Mumbai
+1023,Steven Scott,Business,28000.00,695,280000.00,Mortgage,2026-01-19,London
+1024,Nancy Green,Checking,900.50,630,0.00,None,2026-02-04,Berlin
+1025,Kevin Baker,Savings,115000.00,805,0.00,None,2026-01-31,New York
+1026,Lisa Adams,Business,3200.00,540,9500.00,Personal,2026-02-11,Mumbai
+1027,Edward Nelson,Checking,640.00,670,18000.00,Auto,2026-02-02,London
+1028,Margaret Hill,Savings,420.00,410,0.00,None,2026-01-26,Berlin
+1029,Ronald Campbell,Business,21000.00,715,0.00,None,2026-02-08,New York
+1030,Dorothy Mitchell,Checking,11.00,480,0.00,None,2026-01-15,Mumbai
+1031,Jason Carter,Savings,670.00,520,3200.00,Personal,2026-02-10,London
+1032,Alice Roberts,Business,8800.00,735,0.00,None,2026-02-01,Berlin
+1033,Brian Gomez,Checking,145.00,600,0.00,None,2026-01-29,New York
+1034,Helen Phillips,Savings,29000.00,775,19000.00,Auto,2026-02-05,Mumbai
+1035,Gary Evans,Business,55.00,390,0.00,None,2026-01-10,London
+1036,Donna Turner,Checking,8200.00,690,0.00,None,2026-02-11,Berlin
+1037,Kenneth Parker,Savings,1400.00,650,5500.00,Personal,2026-02-03,New York
+1038,Carol Edwards,Business,72000.00,815,0.00,None,2026-01-21,Mumbai
+1039,Jeff Collins,Checking,190.00,565,24000.00,Auto,2026-02-07,London
+1040,Ruth Stewart,Savings,3100.00,705,0.00,None,2026-01-17,Berlin
+1041,Gregory Morris,Business,15000.00,740,0.00,None,2026-02-12,New York
+1042,Shirley Rogers,Checking,8.50,430,2100.00,Personal,2026-02-04,Mumbai
+1043,Joshua Reed,Savings,98000.00,830,375000.00,Mortgage,2026-01-24,London
+1044,Amy Cook,Business,440.00,515,0.00,None,2026-02-09,Berlin
+1045,Ryan Morgan,Checking,3200.00,660,11000.00,Auto,2026-02-01,New York
+1046,Anna Bell,Savings,1200.00,625,0.00,None,2026-01-27,Mumbai
+1047,Nicholas Murphy,Business,6300.00,685,4200.00,Personal,2026-02-11,London
+1048,Diana Bailey,Checking,150.00,595,0.00,None,2026-02-02,Berlin
+1049,Larry Rivera,Savings,41000.00,755,0.00,None,2026-01-13,New York
+1050,Cheryl Cooper,Business,2700.00,645,15500.00,Auto,2026-02-06,Mumbai
+1051,Peter Ross,Checking,450.00,720,0.00,None,2026-02-08,Berlin
+1052,Janet Ward,Savings,34000.00,810,120000.00,Mortgage,2026-01-22,London
+1053,Douglas Peterson,Business,15.00,410,2500.00,Personal,2026-02-03,Mumbai
+1054,Ann Gray,Checking,9800.00,690,0.00,None,2026-01-19,New York
+1055,Terry James,Savings,210.00,530,0.00,None,2026-02-11,Berlin
+1056,Alice Watson,Business,56000.00,785,0.00,None,2026-01-30,London
+1057,Arthur Brooks,Checking,1200.50,650,45000.00,Mortgage,2026-02-05,Mumbai
+1058,Gloria Kelly,Savings,8900.00,725,0.00,None,2026-02-01,New York
+1059,Ralph Sanders,Business,230.00,480,8900.00,Auto,2026-01-14,Berlin
+1060,Rose Price,Checking,15000.00,760,0.00,None,2026-02-10,London
+1061,Eugene Bennett,Savings,440.00,590,1200.00,Personal,2026-01-25,Mumbai
+1062,Wayne Wood,Business,120000.00,820,0.00,None,2026-02-07,New York
+1063,Lillian Barnes,Checking,30.00,420,0.00,None,2026-02-12,Berlin
+1064,Billy Ross,Savings,7600.00,680,18000.00,Auto,2026-01-28,London
+1065,Brenda Henderson,Business,540.00,550,0.00,None,2026-02-04,Mumbai
+1066,Louis Coleman,Checking,2200.00,635,0.00,None,2026-01-11,New York
+1067,Jean Jenkins,Savings,45000.00,800,210000.00,Mortgage,2026-02-09,Berlin
+1068,Russell Perry,Business,12.50,340,3000.00,Personal,2026-01-21,London
+1069,Doris Powell,Checking,880.00,575,0.00,None,2026-02-10,Mumbai
+1070,Randy Long,Savings,32000.00,740,0.00,None,2026-01-17,New York
+1071,Lois Patterson,Business,900.00,610,12500.00,Auto,2026-02-08,Berlin
+1072,Howard Hughes,Checking,6700.00,705,0.00,None,2026-01-29,London
+1073,Theresa Flores,Savings,150.00,490,4000.00,Personal,2026-02-03,Mumbai
+1074,Victor Washington,Business,78000.00,830,0.00,None,2026-02-11,New York
+1075,Julia Butler,Checking,2100.00,670,0.00,None,2026-01-12,Berlin
+1076,Lawrence Simmons,Savings,55.50,450,15000.00,Auto,2026-02-05,London
+1077,Catherine Foster,Business,11000.00,715,0.00,None,2026-01-31,Mumbai
+1078,Sean Gonzales,Checking,4300.00,695,0.00,None,2026-02-10,New York
+1079,Phyllis Bryant,Savings,28000.00,795,185000.00,Mortgage,2026-01-15,Berlin
+1080,Jesse Alexander,Business,700.00,525,6000.00,Personal,2026-02-02,London
+1081,Martha Russell,Checking,90.00,440,0.00,None,2026-01-26,Mumbai
+1082,Roy Griffin,Savings,5400.00,660,0.00,None,2026-02-07,New York
+1083,Kelly Diaz,Business,31000.00,750,22000.00,Auto,2026-02-11,Berlin
+1084,Alan Hayes,Checking,120.00,510,0.00,None,2026-01-23,London
+1085,Nicole Myers,Savings,6500.00,730,0.00,None,2026-02-09,Mumbai
+1086,Juan Ford,Business,450.00,470,3500.00,Personal,2026-01-18,New York
+1087,Mildred Hamilton,Checking,12500.00,770,0.00,None,2026-02-06,Berlin
+1088,Jerry Graham,Savings,22000.00,805,145000.00,Mortgage,2026-02-01,London
+1089,Rosemary Sullivan,Business,85.00,380,0.00,None,2026-01-27,Mumbai
+1090,Dennis Wallace,Checking,4100.00,685,11000.00,Auto,2026-02-03,New York
+1091,Janice Woods,Savings,760.00,560,0.00,None,2026-01-14,Berlin
+1092,Joe Cole,Business,55000.00,785,0.00,None,2026-02-12,London
+1093,Florence West,Checking,14.00,415,2800.00,Personal,2026-01-30,Mumbai
+1094,Justin Jordan,Savings,9200.00,710,0.00,None,2026-02-05,New York
+1095,Sara Owens,Business,110.00,505,0.00,None,2026-01-22,Berlin
+1096,Jonathan Reynolds,Checking,3300.00,655,14000.00,Auto,2026-02-10,London
+1097,Lori Fisher,Savings,42000.00,815,0.00,None,2026-02-01,Mumbai
+1098,Carl Ellis,Business,560.00,495,5000.00,Personal,2026-01-16,New York
+1099,Bonnie Harrison,Checking,7200.00,725,290000.00,Mortgage,2026-02-08,Berlin
+1100,Teresa Gibson,Savings,1200.00,640,0.00,None,2026-02-04,London
