@@ -1,0 +1,2371 @@
+[
+    {
+        "kb_id": "KB-ZDE8GX",
+        "title": "Eclipse Che: Database - Migrations stuck",
+        "metadata": {
+            "product": "Eclipse Che",
+            "category": "Database",
+            "severity": "SEV-1",
+            "environment": "dev",
+            "status": "Resolved",
+            "created": "2025-12-17T15:20:00Z",
+            "updated": "2025-09-17T10:24:00Z",
+            "tags": [
+                "database",
+                "eclipse-che",
+                "tls"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-D6NCF1",
+            "bug_id": "BUG-0EPF91",
+            "summary": "App starts but throws connection refused to DB.",
+            "impact": "Intermittent errors affecting -10% requests",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Connection pool exhaustion due to leaked connections.",
+            "resolution": "Update secrets and rotate credentials safely."
+        },
+        "resolution_logs": [
+            "[nginx] 413 Request Entity Too Large while reading client request body",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error invalid_redirect_uri",
+            "[postgres] FATAL: password authentication failed for user",
+            "[gitlab] 502 Bad Gateway: Puma timed out"
+        ],
+        "limitations": [
+            "Pool changes may require app restart; monitor connection count.",
+            "Schema migrations can lock tables; schedule off-peak."
+        ],
+        "config_changes": {
+            "DB_SSLMODE": "require",
+            "DB_HOST": "postgres",
+            "DB_POOL_MAX": "50"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2002,
+            "helpful_votes": 863,
+            "not_helpful_votes": 80,
+            "avg_time_on_page_sec": 231.3,
+            "search_hits": 158
+        }
+    },
+    {
+        "kb_id": "KB-UVW53E",
+        "title": "HAProxy: Email - Password reset emails not delivered",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "Email",
+            "severity": "SEV-3",
+            "environment": "prod",
+            "status": "Resolved",
+            "created": "2025-10-10T10:47:00Z",
+            "updated": "2025-12-02T07:13:00Z",
+            "tags": [
+                "email",
+                "haproxy",
+                "header",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-FR4EDT",
+            "bug_id": "BUG-2SYWB3",
+            "summary": "Password reset emails not delivered; connection timeout.",
+            "impact": "Complete outage for all users",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Outbound port blocked by firewall.",
+            "resolution": "Add SPF/DKIM/DMARC and verify DNS records."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[gitlab] 502 Bad Gateway: Puma timed out"
+        ],
+        "limitations": [
+            "SPF/DKIM may take hours to propagate.",
+            "Some providers rewrite envelope sender test end-to-end."
+        ],
+        "config_changes": {
+            "SMTP_HOST": "smtp.provider.tld",
+            "SPF": "v=spfl include: provider.tld -all",
+            "SMTP_FROM": "noreply@example.com"
+        },
+        "system_architecture": {
+            "pattern": "Single VM+ Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 254,
+            "helpful_votes": 48,
+            "not_helpful_votes": 17,
+            "avg_time_on_page_sec": 236.5,
+            "search_hits": 902
+        }
+    },
+    {
+        "kb_id": "KB-VDGAJ8",
+        "title": "Grafana: Networking - Intermittent 502/504 errors from reverse proxy",
+        "metadata": {
+            "product": "Grafana",
+            "category": "Networking",
+            "severity": "SEV-1",
+            "environment": "staging",
+            "status": "Monitoring",
+            "created": "2025-10-13T20:41:00Z",
+            "updated": "2026-01-23T07:54:00Z",
+            "tags": [
+                "grafana",
+                "networking",
+                "oidc",
+                "postgres",
+                "windows"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-GXBENY",
+            "bug_id": "BUG-JQWX4H",
+            "summary": "Service reachable via IP:port but not via domain.",
+            "impact": "Intermittent errors affecting ~10% requests",
+            "detection": "User reports",
+            "root_cause": "Reverse proxy ACL routed to wrong backend due to host header mismatch.",
+            "resolution": "Update DNS and lower TTL during migration."
+        },
+        "resolution_logs": [
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "Fix requires maintenance window if changing router ports.",
+            "DNS changes may take time plan TTL reductions."
+        ],
+        "config_changes": {
+            "haproxy_frontend": "bind *:443 ssl crt /etc/ssl/fullchain.pem",
+            "router_wan_mgmt": "disabled",
+            "dns_ttl": "300"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 837,
+            "helpful_votes": 494,
+            "not_helpful_votes": 319,
+            "avg_time_on_page_sec": 236.6,
+            "search_hits": 3
+        }
+    },
+    {
+        "kb_id": "KB-FHYM4L",
+        "title": "BookStack: Storage - Backup job fails due to permission denied",
+        "metadata": {
+            "product": "BookStack",
+            "category": "Storage",
+            "severity": "SEV-4",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2025-09-09T16:30:00Z",
+            "updated": "2025-08-29T00:51:00Z",
+            "tags": [
+                "bookstack",
+                "docker",
+                "storage"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-1VFZ3Z",
+            "bug_id": "BUG-FKKIBJ",
+            "summary": "Uploads fail; 413 Request Entity Too Large.",
+            "impact": "Complete outage for all users",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Nginx client_max_body_size too low.",
+            "resolution": "Configure logrotate and set retention; expand volume if needed."
+        },
+        "resolution_logs": [
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[postgres] FATAL: password authentication failed for user",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "Log retention may affect audit requirements.",
+            "Raising upload limits increases memory usage during buffering."
+        ],
+        "config_changes": {
+            "client_max_body_size": "100m",
+            "VOLUME_SIZE_GB": "200",
+            "LOGROTATE": "enabled"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1017,
+            "helpful_votes": 195,
+            "not_helpful_votes": 283,
+            "avg_time_on_page_sec": 21.6,
+            "search_hits": 200
+        }
+    },
+    {
+        "kb_id": "KB-9BE2U6",
+        "title": "HAProxy: API - POST requests return 415 Unsupported Media Type",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "API",
+            "severity": "SEV-2",
+            "environment": "staging",
+            "status": "Mitigated",
+            "created": "2025-10-30T08:35:00Z",
+            "updated": "2025-10-23T01:56:00Z",
+            "tags": [
+                "api",
+                "compose",
+                "haproxy",
+                "tls"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-6MR268",
+            "bug_id": "BUG-46P7Q9",
+            "summary": "Webhook delivery fails with 401 after rotation.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "User reports",
+            "root_cause": "CORS allowed origin mismatch after domain change.",
+            "resolution": "Set Content-Type: application/json; update client SDK."
+        },
+        "resolution_logs": [
+            "[postgres] FATAL: password authentication failed for user",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri",
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user"
+        ],
+        "limitations": [
+            "Key rotation requires client coordination.",
+            "CORS allowlist is environment-specific avoid wildcard in prod."
+        ],
+        "config_changes": {
+            "API_KEY_ROTATION": "90d",
+            "CORS_ALLOWED_ORIGINS": "https://app.example.com",
+            "CONTENT_TYPE": "application/json"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 344,
+            "helpful_votes": 135,
+            "not_helpful_votes": 69,
+            "avg_time_on_page_sec": 21.0,
+            "search_hits": 371
+        }
+    },
+    {
+        "kb_id": "KB-1QZJ86",
+        "title": "SonarQube Community: Database - High DB CPU and slow queries causing timeouts",
+        "metadata": {
+            "product": "SonarQube Community",
+            "category": "Database",
+            "severity": "SEV-1",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2026-01-27T03:05:00Z",
+            "updated": "2026-01-12T22:00:00Z",
+            "tags": [
+                "database",
+                "header",
+                "oidc",
+                "sonarqube-community"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-5UFRDL",
+            "bug_id": "BUG-1ERBFQ",
+            "summary": "High DB CPU and slow queries causing timeouts.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "User reports",
+            "root_cause": "DB container on different network; service name not resolvable.",
+            "resolution": "Attach services to same Docker network; use service name for DB host."
+        },
+        "resolution_logs": [
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[gitlab] 502 Bad Gateway: Puma timed out"
+        ],
+        "limitations": [
+            "Pool changes may require app restart monitor connection count.",
+            "Schema migrations can lock tables; schedule off-peak."
+        ],
+        "config_changes": {
+            "DB_POOL_MAX": "50",
+            "DB_HOST": "postgres",
+            "DB_SSLMODE": "require"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1423,
+            "helpful_votes": 111,
+            "not_helpful_votes": 265,
+            "avg_time_on_page_sec": 15.3,
+            "search_hits": 523
+        }
+    },
+    {
+        "kb_id": "KB-DFY6SP",
+        "title": "Firefly III: Database - App starts but throws connection refused to DB",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Database",
+            "severity": "SEV-3",
+            "environment": "prod",
+            "status": "Resolved",
+            "created": "2025-11-26T05:38:00Z",
+            "updated": "2025-12-29T11:39:00Z",
+            "tags": [
+                "database",
+                "firefly-iii",
+                "mysql",
+                "oidc"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-SC3LKR",
+            "bug_id": "BUG-2AQXV9",
+            "summary": "High DB CPU and slow queries causing timeouts.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Connection pool exhaustion due to leaked connections.",
+            "resolution": "Update secrets and rotate credentials safely."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300"
+        ],
+        "limitations": [
+            "Schema migrations can lock tables schedule off-peak.",
+            "Pool changes may require app restart; monitor connection count."
+        ],
+        "config_changes": {
+            "DB_SSLMODE": "require",
+            "DB_HOST": "postgres",
+            "DB_POOL_MAX": "50"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2287,
+            "helpful_votes": 207,
+            "not_helpful_votes": 77,
+            "avg_time_on_page_sec": 154.8,
+            "search_hits": 500
+        }
+    },
+    {
+        "kb_id": "KB-A3E68F",
+        "title": "BookStack: Upgrade - Upgrade completes but service fails health checks",
+        "metadata": {
+            "product": "BookStack",
+            "category": "Upgrade",
+            "severity": "SEV-1",
+            "environment": "staging",
+            "status": "Known Issue",
+            "created": "2026-02-01T16:20:00Z",
+            "updated": "2025-09-02T05:56:00Z",
+            "tags": [
+                "bookstack",
+                "oidc",
+                "proxy",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-7E4QEQ",
+            "bug_id": "BUG-PNO35Y",
+            "summary": "Containers restart in a loop after image update.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Old database schema incompatible; migrations not run.",
+            "resolution": "Pin image version and validate dependencies."
+        },
+        "resolution_logs": [
+            "[postgres] FATAL: password authentication failed for user",
+            "[docker] network <kb_net> has conflicting subnet cannot create"
+        ],
+        "limitations": [
+            "Config changes differ by major version; read release notes.",
+            "Rollback plan required; DB schema may be forward-only."
+        ],
+        "config_changes": {
+            "MIGRATIONS": "run-once",
+            "BACKUP_BEFORE_UPGRADE": "true",
+            "IMAGE_TAG": "pinned"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 461,
+            "helpful_votes": 360,
+            "not_helpful_votes": 46,
+            "avg_time_on_page_sec": 64.8,
+            "search_hits": 995
+        }
+    },
+    {
+        "kb_id": "KB-KA52ZT",
+        "title": "Firefly III: Auth - Users cannot log in via SSO",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Auth",
+            "severity": "SEV-2",
+            "environment": "dev",
+            "status": "Resolved",
+            "created": "2025-12-01T03:37:00Z",
+            "updated": "2026-01-27T23:36:00Z",
+            "tags": [
+                "auth",
+                "firefly-iii",
+                "header",
+                "smtp"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-JOWYUH",
+            "bug_id": "BUG-VAUVZH",
+            "summary": "Login works locally but fails behind reverse proxy.",
+            "impact": "Complete outage for all users",
+            "detection": "Grafana alert: error_rate > 5%",
+            "root_cause": "Missing or incorrect X-Forwarded-Proto/X-Forwarded-Host headers at reverse proxy.",
+            "resolution": "Set proxy headers correctly and configure external hostname in the app."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "If multiple proxies exist, all must preserve X-Forwarded-* headers.",
+            "Some clients cache redirect URIS clear browser cache after changes."
+        ],
+        "config_changes": {
+            "KC_HOSTNAME": "https://auth.example.com",
+            "PROXY_ADDRESS_FORWARDING": "true",
+            "X-Forwarded-Proto": "https"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 490,
+            "helpful_votes": 85,
+            "not_helpful_votes": 329,
+            "avg_time_on_page_sec": 48.9,
+            "search_hits": 425
+        }
+    },
+    {
+        "kb_id": "KB-902V21",
+        "title": "HAProxy: API - Webhook delivery fails with 401 after rotation",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "API",
+            "severity": "SEV-3",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2026-02-07T12:05:00Z",
+            "updated": "2025-10-30T23:34:00Z",
+            "tags": [
+                "api",
+                "haproxy",
+                "smtp"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-19MPFL",
+            "bug_id": "BUG-V9FUPX",
+            "summary": "CORS preflight fails in browser.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "User reports",
+            "root_cause": "API key rotated but clients still using old key.",
+            "resolution": "Rotate API keys and update clients."
+        },
+        "resolution_logs": [
+            "[postgres] FATAL: password authentication failed for user",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error invalid_redirect_uri",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "Key rotation requires client coordination.",
+            "CORS allowlist is environment-specific avoid wildcard in prod."
+        ],
+        "config_changes": {
+            "API_KEY_ROTATION": "90d",
+            "CONTENT_TYPE": "application/json",
+            "CORS_ALLOWED_ORIGINS": "https://app.example.com"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2332,
+            "helpful_votes": 153,
+            "not_helpful_votes": 1244,
+            "avg_time_on_page_sec": 231.4,
+            "search_hits": 515
+        }
+    },
+    {
+        "kb_id": "KB-HGET7M",
+        "title": "HAProxy: UI - Static assets fail to load",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "UI",
+            "severity": "SEV-2",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2026-02-05T22:15:00Z",
+            "updated": "2025-08-31T02:57:00Z",
+            "tags": [
+                "haproxy",
+                "header",
+                "proxy",
+                "ui"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-YQOAA8",
+            "bug_id": "BUG-T3RUP4",
+            "summary": "Editor fails to initialize due to missing JS bundles.",
+            "impact": "Admin-only feature broken",
+            "detection": "User reports",
+            "root_cause": "Cache headers cause stale bundles after deploy.",
+            "resolution": "Disable double-compression; ensure correct Content-Encoding."
+        },
+        "resolution_logs": [
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[docker] network <kb_net> has conflicting subnet; cannot create"
+        ],
+        "limitations": [
+            "CSP loosening may reduce security prefer nonce-based policies.",
+            "Cache invalidation may be needed for all users; can't force remotely."
+        ],
+        "config_changes": {
+            "gzip": "off",
+            "cache_control": "no-cache",
+            "csp_policy": "script-src 'self'"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 754,
+            "helpful_votes": 402,
+            "not_helpful_votes": 230,
+            "avg_time_on_page_sec": 216.8,
+            "search_hits": 643
+        }
+    },
+    {
+        "kb_id": "KB-KVML73",
+        "title": "GitLab CE: Networking - Service reachable via IP:port but not via domain",
+        "metadata": {
+            "product": "GitLab CE",
+            "category": "Networking",
+            "severity": "SEV-3",
+            "environment": "staging",
+            "status": "Resolved",
+            "created": "2025-09-23T05:36:00Z",
+            "updated": "2025-11-14T02:08:00Z",
+            "tags": [
+                "gitlab-ce",
+                "networking",
+                "windows"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-CTYXV2",
+            "bug_id": "BUG-KGAFRF",
+            "summary": "Intermittent 502/504 errors from reverse proxy.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "Grafana alert: error_rate > 5%",
+            "root_cause": "Router WAN management port collision on 443 causing misrouting.",
+            "resolution": "Fix HAProxy ACL rules; route by Host header; reload HAProxy."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[postgres] FATAL: password authentication failed for user",
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300"
+        ],
+        "limitations": [
+            "DNS changes may take time plan TTL reductions.",
+            "Fix requires maintenance window if changing router ports."
+        ],
+        "config_changes": {
+            "router_wan_mgmt": "disabled",
+            "haproxy_frontend": "bind *:443 ssl crt /etc/ssl/fullchain.pem",
+            "dns_ttl": "300"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 35,
+            "helpful_votes": 19,
+            "not_helpful_votes": 4,
+            "avg_time_on_page_sec": 150.5,
+            "search_hits": 671
+        }
+    },
+    {
+        "kb_id": "KB-XF6MZK",
+        "title": "Eclipse Che: API - POST requests return 415 Unsupported Media Type",
+        "metadata": {
+            "product": "Eclipse Che",
+            "category": "API",
+            "severity": "SEV-3",
+            "environment": "dev",
+            "status": "Resolved",
+            "created": "2025-12-22T08:34:00Z",
+            "updated": "2025-10-08T13:32:00Z",
+            "tags": [
+                "api",
+                "eclipse-che",
+                "smtp"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-P0EC49",
+            "bug_id": "BUG-8UK1GE",
+            "summary": "CORS preflight fails in browser.",
+            "impact": "Intermittent errors affecting ~10% requests",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "CORS allowed origin mismatch after domain change.",
+            "resolution": "Rotate API keys and update clients."
+        },
+        "resolution_logs": [
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "CORS allowlist is environment-specifici avoid wildcard in prod.",
+            "Key rotation requires client coordination."
+        ],
+        "config_changes": {
+            "CORS_ALLOWED_ORIGINS": "https://app.example.com",
+            "API_KEY_ROTATION": "90d",
+            "CONTENT_TYPE": "application/json"
+        },
+        "system_architecture": {
+            "pattern": "Single VM Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 776,
+            "helpful_votes": 614,
+            "not_helpful_votes": 149,
+            "avg_time_on_page_sec": 56.3,
+            "search_hits": 153
+        }
+    },
+    {
+        "kb_id": "KB-L2QAGW",
+        "title": "Eclipse Che: Security - Admin endpoint exposed unintentionally on WAN",
+        "metadata": {
+            "product": "Eclipse Che",
+            "category": "Security",
+            "severity": "SEV-4",
+            "environment": "dev",
+            "status": "Known Issue",
+            "created": "2025-12-27T16:41:00Z",
+            "updated": "2026-01-25T05:58:00Z",
+            "tags": [
+                "compose",
+                "eclipse-che",
+                "security",
+                "smtp"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-NCXVJC",
+            "bug_id": "BUG-NQCNAU",
+            "summary": "TLS handshake fails; client sees ERR_SSL_VERSION_OR_CIPHER_MISMATCH.",
+            "impact": "Admin-only feature broken",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Admin interface bound to 0.0.0.0 and exposed via proxy.",
+            "resolution": "Install full certificate chain including intermediates."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "IP allowlists require stable source IPs or VPN.",
+            "TLS changes can break legacy clients verify compatibility."
+        ],
+        "config_changes": {
+            "ADMIN_IP_ALLOWLIST": "203.0.113.0/24",
+            "HSTS": "max-age=31536000",
+            "TLS_MIN_VERSION": "TLSv1.2"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2066,
+            "helpful_votes": 703,
+            "not_helpful_votes": 298,
+            "avg_time_on_page_sec": 91.3,
+            "search_hits": 331
+        }
+    },
+    {
+        "kb_id": "KB-EGY5MT",
+        "title": "HAProxy: Database - App starts but throws connection refused to DB",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "Database",
+            "severity": "SEV-2",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2026-02-02T23:27:00Z",
+            "updated": "2026-01-03T23:38:00Z",
+            "tags": [
+                "database",
+                "haproxy",
+                "windows"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-IC4UDY",
+            "bug_id": "BUG-FKOZM4",
+            "summary": "App starts but throws connection refused to DB.",
+            "impact": "Complete outage for all users",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Incorrect credentials after secret rotation.",
+            "resolution": "Increase pool size and fix leaked connections; recycle workers."
+        },
+        "resolution_logs": [
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[docker] network <kb_net> has conflicting subnet cannot create"
+        ],
+        "limitations": [
+            "Pool changes may require app restart; monitor connection count.",
+            "Schema migrations can lock tables schedule off-peak."
+        ],
+        "config_changes": {
+            "DB_POOL_MAX": "50",
+            "DB_SSLMODE": "require",
+            "DB_HOST": "postgres"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1285,
+            "helpful_votes": 1047,
+            "not_helpful_votes": 20,
+            "avg_time_on_page_sec": 24.4,
+            "search_hits": 1032
+        }
+    },
+    {
+        "kb_id": "\u041a\u0412-\u0412\u0415\u041d\u041c\u04065",
+        "title": "Firefly III: Database - App starts but throws connection refused to DB",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Database",
+            "severity": "SEV-4",
+            "environment": "prod",
+            "status": "Known Issue",
+            "created": "2025-09-08T19:45:00Z",
+            "updated": "2025-11-24T00:58:00Z",
+            "tags": [
+                "database",
+                "firefly-iii",
+                "k8s",
+                "proxy"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-SKOEWQ",
+            "bug_id": "BUG-KUR3JQ",
+            "summary": "Migrations stuck; table locks detected.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "Support ticket spike",
+            "root_cause": "Connection pool exhaustion due to leaked connections.",
+            "resolution": "Increase pool size and fix leaked connections; recycle workers."
+        },
+        "resolution_logs": [
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[docker] network <kb_net> has conflicting subnet cannot create"
+        ],
+        "limitations": [
+            "Schema migrations can lock tables schedule off-peak.",
+            "Pool changes may require app restart; monitor connection count."
+        ],
+        "config_changes": {
+            "DB_POOL_MAX": "50",
+            "DB_SSLMODE": "require",
+            "DB_HOST": "postgres"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 930,
+            "helpful_votes": 627,
+            "not_helpful_votes": 23,
+            "avg_time_on_page_sec": 17.1,
+            "search_hits": 5
+        }
+    },
+    {
+        "kb_id": "KB-TG7W80",
+        "title": "Open WebUI: Storage - Backup job fails due to permission denied",
+        "metadata": {
+            "product": "Open WebUI",
+            "category": "Storage",
+            "severity": "SEV-1",
+            "environment": "prod",
+            "status": "Mitigated",
+            "created": "2025-08-27T03:35:00Z",
+            "updated": "2025-12-08T11:57:00Z",
+            "tags": [
+                "open-webui",
+                "proxy",
+                "redis",
+                "storage"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-0TINX4",
+            "bug_id": "BUG-KIAPJ2",
+            "summary": "Backup job fails due to permission denied.",
+            "impact": "Admin-only feature broken",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Log rotation disabled; volume filled.",
+            "resolution": "Configure logrotate and set retention; expand volume if needed."
+        },
+        "resolution_logs": [
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300"
+        ],
+        "limitations": [
+            "Log retention may affect audit requirements.",
+            "Raising upload limits increases memory usage during buffering."
+        ],
+        "config_changes": {
+            "client_max_body_size": "100m",
+            "VOLUME_SIZE_GB": "200",
+            "LOGROTATE": "enabled"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 925,
+            "helpful_votes": 107,
+            "not_helpful_votes": 267,
+            "avg_time_on_page_sec": 65.0,
+            "search_hits": 79
+        }
+    },
+    {
+        "kb_id": "KB-QDR917",
+        "title": "GitLab CE: Storage - Disk fills rapidly due to logs",
+        "metadata": {
+            "product": "GitLab CE",
+            "category": "Storage",
+            "severity": "SEV-2",
+            "environment": "staging",
+            "status": "Known Issue",
+            "created": "2025-09-13T04:36:00Z",
+            "updated": "2025-09-04T13:18:00Z",
+            "tags": [
+                "gitlab-ce",
+                "mysql",
+                "storage",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-QSNF6A",
+            "bug_id": "BUG-KQPMKU",
+            "summary": "Backup job fails due to permission denied.",
+            "impact": "Complete outage for all users",
+            "detection": "User reports",
+            "root_cause": "Log rotation disabled; volume filled.",
+            "resolution": "Increase upload size limits in proxy and app."
+        },
+        "resolution_logs": [
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri",
+            "[nginx] 413 Request Entity Too Large while reading client request body",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "Raising upload limits increases memory usage during buffering.",
+            "Log retention may affect audit requirements."
+        ],
+        "config_changes": {
+            "client_max_body_size": "100m",
+            "VOLUME_SIZE_GB": "200",
+            "LOGROTATE": "enabled"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 543,
+            "helpful_votes": 100,
+            "not_helpful_votes": 405,
+            "avg_time_on_page_sec": 184.7,
+            "search_hits": 419
+        }
+    },
+    {
+        "kb_id": "KB-V1QBWQ",
+        "title": "SonarQube Community: Storage - Backup job fails due to permission denied",
+        "metadata": {
+            "product": "SonarQube Community",
+            "category": "Storage",
+            "severity": "SEV-1",
+            "environment": "staging",
+            "status": "Monitoring",
+            "created": "2025-08-17T10:26:00Z",
+            "updated": "2025-09-22T05:15:00Z",
+            "tags": [
+                "k8s",
+                "smtp",
+                "sonarqube-community",
+                "storage"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-SDXU64",
+            "bug_id": "BUG-SB0B17",
+            "summary": "Uploads fail; 413 Request Entity Too Large.",
+            "impact": "Intermittent errors affecting ~10% requests",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Nginx client_max_body_size too low.",
+            "resolution": "Fix mount permissions and run backup as correct user."
+        },
+        "resolution_logs": [
+            "[docker] network <kb_net> has conflicting subnet cannot create",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "Log retention may affect audit requirements.",
+            "Raising upload limits increases memory usage during buffering."
+        ],
+        "config_changes": {
+            "LOGROTATE": "enabled",
+            "client_max_body_size": "100m",
+            "VOLUME_SIZE_GB": "200"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 519,
+            "helpful_votes": 34,
+            "not_helpful_votes": 178,
+            "avg_time_on_page_sec": 144.6,
+            "search_hits": 1068
+        }
+    },
+    {
+        "kb_id": "KB-9UK32Q",
+        "title": "Grafana: API - POST requests return 415 Unsupported Media Type",
+        "metadata": {
+            "product": "Grafana",
+            "category": "API",
+            "severity": "SEV-3",
+            "environment": "dev",
+            "status": "Known Issue",
+            "created": "2026-01-03T04:40:00Z",
+            "updated": "2025-12-27T03:14:00Z",
+            "tags": [
+                "api",
+                "compose",
+                "grafana",
+                "smtp",
+                "tls"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-OIV3P6",
+            "bug_id": "BUG-MRTJJP",
+            "summary": "POST requests return 415 Unsupported Media Type.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "Grafana alert: error_rate > 5%",
+            "root_cause": "Missing Content-Type header; API expects application/json.",
+            "resolution": "Update CORS allowlist and redeploy."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[docker] network <kb_net> has conflicting subnet cannot create"
+        ],
+        "limitations": [
+            "CORS allowlist is environment-specifici avoid wildcard in prod.",
+            "Key rotation requires client coordination."
+        ],
+        "config_changes": {
+            "CONTENT_TYPE": "application/json",
+            "API_KEY_ROTATION": "90d",
+            "CORS_ALLOWED_ORIGINS": "https://app.example.com"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1734,
+            "helpful_votes": 988,
+            "not_helpful_votes": 466,
+            "avg_time_on_page_sec": 16.5,
+            "search_hits": 838
+        }
+    },
+    {
+        "kb_id": "KB-UAY5GC",
+        "title": "HAProxy: Database - Migrations stuck",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "Database",
+            "severity": "SEV-1",
+            "environment": "dev",
+            "status": "Known Issue",
+            "created": "2025-10-03T01:34:00Z",
+            "updated": "2025-10-20T05:17:00Z",
+            "tags": [
+                "compose",
+                "database",
+                "haproxy",
+                "linux",
+                "windows"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-Q8NKM7",
+            "bug_id": "BUG-WG38N4",
+            "summary": "High DB CPU and slow queries causing timeouts.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "User reports",
+            "root_cause": "DB container on different network; service name not resolvable.",
+            "resolution": "Increase pool size and fix leaked connections; recycle workers."
+        },
+        "resolution_logs": [
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[app] ERROR: Token validation failed: 'iss claim mismatch",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri"
+        ],
+        "limitations": [
+            "Pool changes may require app restart monitor connection count.",
+            "Schema migrations can lock tables schedule off-peak."
+        ],
+        "config_changes": {
+            "DB_SSLMODE": "require",
+            "DB_POOL_MAX": "50",
+            "DB_HOST": "postgres"
+        },
+        "system_architecture": {
+            "pattern": "Single VM+ Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1972,
+            "helpful_votes": 5,
+            "not_helpful_votes": 1649,
+            "avg_time_on_page_sec": 176.6,
+            "search_hits": 575
+        }
+    },
+    {
+        "kb_id": "KB-TU451F",
+        "title": "Eclipse Che: Performance - Ul becomes sluggish after ~30 minutes of usage",
+        "metadata": {
+            "product": "Eclipse Che",
+            "category": "Performance",
+            "severity": "SEV-2",
+            "environment": "prod",
+            "status": "Known Issue",
+            "created": "2025-12-10T16:54:00Z",
+            "updated": "2025-09-18T07:06:00Z",
+            "tags": [
+                "eclipse-che",
+                "linux",
+                "performance",
+                "sso"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-XJTYDF",
+            "bug_id": "BUG-UI7WAA",
+            "summary": "Ul becomes sluggish after ~30 minutes of usage.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "Support ticket spike",
+            "root_cause": "Unbounded log growth and sync IO causing CPU spikes.",
+            "resolution": "Enable caching and add DB indexes for hot paths."
+        },
+        "resolution_logs": [
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[postgres] FATAL: password authentication failed for user",
+            "[docker network <kb_net> has conflicting subnet cannot create",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "Metrics label drops can affect dashboards communicate changes.",
+            "Index creation may take time on large tables."
+        ],
+        "config_changes": {
+            "CACHE_TTL": "300",
+            "PROM_SCRAPE_INTERVAL": "30s",
+            "LOG_LEVEL": "INFO"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1744,
+            "helpful_votes": 857,
+            "not_helpful_votes": 692,
+            "avg_time_on_page_sec": 29.2,
+            "search_hits": 738
+        }
+    },
+    {
+        "kb_id": "KB-CVG645",
+        "title": "Keycloak: Auth - Login works locally but fails behind reverse proxy",
+        "metadata": {
+            "product": "Keycloak",
+            "category": "Auth",
+            "severity": "SEV-2",
+            "environment": "staging",
+            "status": "Monitoring",
+            "created": "2025-11-17T22:44:00Z",
+            "updated": "2025-09-25T10:08:00Z",
+            "tags": [
+                "auth",
+                "keycloak",
+                "postgres",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-JCNOIV",
+            "bug_id": "BUG-GXV479",
+            "summary": "Login works locally but fails behind reverse proxy.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "CI/CD health check failure",
+            "root_cause": "Missing or incorrect X-Forwarded-Proto/X-Forwarded-Host headers at reverse proxy.",
+            "resolution": "Update OIDC client redirect URIs and restart services."
+        },
+        "resolution_logs": [
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch"
+        ],
+        "limitations": [
+            "If multiple proxies exist, all must preserve X-Forwarded- headers.",
+            "Some clients cache redirect URIS; clear browser cache after changes."
+        ],
+        "config_changes": {
+            "PROXY_ADDRESS_FORWARDING": "true",
+            "KC_HOSTNAME": "https://auth.example.com",
+            "X-Forwarded-Proto": "https"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 54,
+            "helpful_votes": 23,
+            "not_helpful_votes": 8,
+            "avg_time_on_page_sec": 191.3,
+            "search_hits": 1151
+        }
+    },
+    {
+        "kb_id": "KB-LOCUB1",
+        "title": "SonarQube Community: Upgrade - New version breaks configuration parsing",
+        "metadata": {
+            "product": "SonarQube Community",
+            "category": "Upgrade",
+            "severity": "SEV-4",
+            "environment": "staging",
+            "status": "Resolved",
+            "created": "2026-01-22T15:30:00Z",
+            "updated": "2025-12-21T07:20:00Z",
+            "tags": [
+                "docker",
+                "sonarqube-community",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-D57CHO",
+            "bug_id": "BUG-Z2EAYJ",
+            "summary": "Containers restart in a loop after image update.",
+            "impact": "Complete outage for all users",
+            "detection": "User reports",
+            "root_cause": "Pinned image digest changed; missing dependency in new image.",
+            "resolution": "Pin image version and validate dependencies."
+        },
+        "resolution_logs": [
+            "[docker] network <kb_net> has conflicting subnet cannot create",
+            "[nginx] 413 Request Entity Too Large while reading client request body"
+        ],
+        "limitations": [
+            "Rollback plan required; DB schema may be forward-only.",
+            "Config changes differ by major version read release notes."
+        ],
+        "config_changes": {
+            "BACKUP_BEFORE_UPGRADE": "true",
+            "IMAGE_TAG": "pinned",
+            "MIGRATIONS": "run-once"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 671,
+            "helpful_votes": 644,
+            "not_helpful_votes": 25,
+            "avg_time_on_page_sec": 107.3,
+            "search_hits": 789
+        }
+    },
+    {
+        "kb_id": "KB-VSRDVA",
+        "title": "BookStack: Upgrade - Containers restart in a loop after image update",
+        "metadata": {
+            "product": "BookStack",
+            "category": "Upgrade",
+            "severity": "SEV-3",
+            "environment": "staging",
+            "status": "Monitoring",
+            "created": "2026-01-03T17:02:00Z",
+            "updated": "2026-02-03T02:07:00Z",
+            "tags": [
+                "bookstack",
+                "oidc",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-JT1PYY",
+            "bug_id": "BUG-YO2SAU",
+            "summary": "Containers restart in a loop after image update.",
+            "impact": "Admin-only feature broken",
+            "detection": "Grafana alert: error_rate > 5%",
+            "root_cause": "Old database schema incompatible; migrations not run.",
+            "resolution": "Apply config migration notes; replace deprecated env vars."
+        },
+        "resolution_logs": [
+            "[postgres] FATAL: password authentication failed for user",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js"
+        ],
+        "limitations": [
+            "Config changes differ by major version; read release notes.",
+            "Rollback plan required: DB schema may be forward-only."
+        ],
+        "config_changes": {
+            "BACKUP_BEFORE_UPGRADE": "true",
+            "IMAGE_TAG": "pinned",
+            "MIGRATIONS": "run-once"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1648,
+            "helpful_votes": 1596,
+            "not_helpful_votes": 33,
+            "avg_time_on_page_sec": 207.4,
+            "search_hits": 504
+        }
+    },
+    {
+        "kb_id": "KB-XGX3FJ",
+        "title": "Keycloak: API - CORS preflight fails in browser",
+        "metadata": {
+            "product": "Keycloak",
+            "category": "API",
+            "severity": "SEV-3",
+            "environment": "staging",
+            "status": "Resolved",
+            "created": "2025-10-21T17:08:00Z",
+            "updated": "2025-09-11T07:44:00Z",
+            "tags": [
+                "api",
+                "k8s",
+                "keycloak"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-UBWR7B",
+            "bug_id": "BUG-GCN5NQ",
+            "summary": "CORS preflight fails in browser.",
+            "impact": "Complete outage for all users",
+            "detection": "User reports",
+            "root_cause": "CORS allowed origin mismatch after domain change.",
+            "resolution": "Set Content-Type: application/json; update client SDK."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error invalid_redirect_uri",
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[nginx] 413 Request Entity Too Large while reading client request body"
+        ],
+        "limitations": [
+            "Key rotation requires client coordination.",
+            "CORS allowlist is environment-specific avoid wildcard in prod."
+        ],
+        "config_changes": {
+            "API_KEY_ROTATION": "90d",
+            "CORS_ALLOWED_ORIGINS": "https://app.example.com",
+            "CONTENT_TYPE": "application/json"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 431,
+            "helpful_votes": 241,
+            "not_helpful_votes": 82,
+            "avg_time_on_page_sec": 96.7,
+            "search_hits": 798
+        }
+    },
+    {
+        "kb_id": "KB-4YK2PJ",
+        "title": "GitLab CE: Storage - Disk fills rapidly due to logs",
+        "metadata": {
+            "product": "GitLab CE",
+            "category": "Storage",
+            "severity": "SEV-1",
+            "environment": "dev",
+            "status": "Resolved",
+            "created": "2025-10-21T01:40:00Z",
+            "updated": "2025-12-15T20:53:00Z",
+            "tags": [
+                "gitlab-ce",
+                "sso",
+                "storage"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-A3MCKO",
+            "bug_id": "BUG-EXI2GY",
+            "summary": "Uploads fail; 413 Request Entity Too Large.",
+            "impact": "Complete outage for all users",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Log rotation disabled; volume filled.",
+            "resolution": "Increase upload size limits in proxy and app."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[postgres] FATAL: password authentication failed for user",
+            "[nginx] 413 Request Entity Too Large while reading client request body"
+        ],
+        "limitations": [
+            "Raising upload limits increases memory usage during buffering.",
+            "Log retention may affect audit requirements."
+        ],
+        "config_changes": {
+            "VOLUME_SIZE_GB": "200",
+            "LOGROTATE": "enabled",
+            "client_max_body_size": "100m"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes + Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1185,
+            "helpful_votes": 851,
+            "not_helpful_votes": 83,
+            "avg_time_on_page_sec": 25.1,
+            "search_hits": 601
+        }
+    },
+    {
+        "kb_id": "KB-26V612",
+        "title": "Grafana: Auth - OIDC token exchange fails with invalid_client or invalid_redirect_uri",
+        "metadata": {
+            "product": "Grafana",
+            "category": "Auth",
+            "severity": "SEV-2",
+            "environment": "dev",
+            "status": "Mitigated",
+            "created": "2025-12-31T05:22:00Z",
+            "updated": "2026-01-24T09:04:00Z",
+            "tags": [
+                "auth",
+                "grafana",
+                "linux",
+                "oidc"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-A7SLX1",
+            "bug_id": "BUG-CONRLI",
+            "summary": "Users cannot log in via SSO; redirect loop observed.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Keycloak client redirect URI mismatch after hostname change.",
+            "resolution": "Set proxy headers correctly and configure external hostname in the app."
+        },
+        "resolution_logs": [
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error invalid_redirect_uri",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "Some clients cache redirect URIS clear browser cache after changes.",
+            "If multiple proxies exist, all must preserve X-Forwarded- headers."
+        ],
+        "config_changes": {
+            "X-Forwarded-Proto": "https",
+            "KC_HOSTNAME": "https://auth.example.com",
+            "PROXY_ADDRESS_FORWARDING": "true"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes+ Ingress",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2360,
+            "helpful_votes": 250,
+            "not_helpful_votes": 1194,
+            "avg_time_on_page_sec": 211.0,
+            "search_hits": 1013
+        }
+    },
+    {
+        "kb_id": "KB-B78IBP",
+        "title": "BookStack: Security - Admin endpoint exposed unintentionally on WAN",
+        "metadata": {
+            "product": "BookStack",
+            "category": "Security",
+            "severity": "SEV-3",
+            "environment": "prod",
+            "status": "Monitoring",
+            "created": "2025-10-03T04:16:00Z",
+            "updated": "2025-10-23T08:38:00Z",
+            "tags": [
+                "bookstack",
+                "docker",
+                "security"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-FOLKGT",
+            "bug_id": "BUG-Q9BBGM",
+            "summary": "HSTS causes downgrade issues after cert renewal.",
+            "impact": "Complete outage for all users",
+            "detection": "Support ticket spike",
+            "root_cause": "TLS configured with legacy ciphers; modern clients reject.",
+            "resolution": "Restrict admin endpoints by IP allowlist and auth."
+        },
+        "resolution_logs": [
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[postgres] FATAL: password authentication failed for user"
+        ],
+        "limitations": [
+            "TLS changes can break legacy clients; verify compatibility.",
+            "IP allowlists require stable source IPs or VPN."
+        ],
+        "config_changes": {
+            "HSTS": "max-age=31536000",
+            "ADMIN_IP_ALLOWLIST": "203.0.113.0/24",
+            "TLS_MIN_VERSION": "TLSv1.2"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1492,
+            "helpful_votes": 223,
+            "not_helpful_votes": 1087,
+            "avg_time_on_page_sec": 54.7,
+            "search_hits": 664
+        }
+    },
+    {
+        "kb_id": "KB-6BOIOZ",
+        "title": "Firefly III: Performance - Ul becomes sluggish after ~30 minutes of usage",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Performance",
+            "severity": "SEV-1",
+            "environment": "staging",
+            "status": "Mitigated",
+            "created": "2026-02-03T02:53:00Z",
+            "updated": "2025-11-27T00:19:00Z",
+            "tags": [
+                "firefly-iii",
+                "performance",
+                "redis"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-3CCCRR",
+            "bug_id": "BUG-8CGQH7",
+            "summary": "Memory usage grows continuously; suspected leak.",
+            "impact": "Degraded performance; p95 latency > 3s",
+            "detection": "User reports",
+            "root_cause": "Misconfigured cache leading to repeated expensive queries.",
+            "resolution": "Enable log rotation; move logs to async sink; cap verbosity."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "Metrics label drops can affect dashboards communicate changes.",
+            "Index creation may take time on large tables."
+        ],
+        "config_changes": {
+            "CACHE_TTL": "300",
+            "PROM_SCRAPE_INTERVAL": "30s",
+            "LOG_LEVEL": "INFO"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 977,
+            "helpful_votes": 331,
+            "not_helpful_votes": 570,
+            "avg_time_on_page_sec": 86.2,
+            "search_hits": 552
+        }
+    },
+    {
+        "kb_id": "KB-SDBK9E",
+        "title": "SonarQube Community: Performance - Memory usage grows continuously",
+        "metadata": {
+            "product": "SonarQube Community",
+            "category": "Performance",
+            "severity": "SEV-3",
+            "environment": "dev",
+            "status": "Known Issue",
+            "created": "2026-01-08T14:48:00Z",
+            "updated": "2025-09-08T16:06:00Z",
+            "tags": [
+                "performance",
+                "sonarqube-community",
+                "windows"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-W2D7Y2",
+            "bug_id": "BUG-WG7OJ0",
+            "summary": "Memory usage grows continuously; suspected leak.",
+            "impact": "Admin-only feature broken",
+            "detection": "Grafana alert: error_rate > 5%",
+            "root_cause": "Unbounded log growth and sync IO causing CPU spikes.",
+            "resolution": "Enable log rotation; move logs to async sink; cap verbosity."
+        },
+        "resolution_logs": [
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri",
+            "[docker] network <kb_net> has conflicting subnet cannot create"
+        ],
+        "limitations": [
+            "Index creation may take time on large tables.",
+            "Metrics label drops can affect dashboards; communicate changes."
+        ],
+        "config_changes": {
+            "PROM_SCRAPE_INTERVAL": "30s",
+            "CACHE_TTL": "300",
+            "LOG_LEVEL": "INFO"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1326,
+            "helpful_votes": 1245,
+            "not_helpful_votes": 31,
+            "avg_time_on_page_sec": 230.6,
+            "search_hits": 418
+        }
+    },
+    {
+        "kb_id": "KB-BDQ5T8",
+        "title": "Firefly III: Auth - OIDC token exchange fails with invalid_client or invalid_redirect_uri",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Auth",
+            "severity": "SEV-1",
+            "environment": "dev",
+            "status": "Resolved",
+            "created": "2025-10-02T04:54:00Z",
+            "updated": "2025-11-01T00:28:00Z",
+            "tags": [
+                "auth",
+                "firefly-iii",
+                "header",
+                "k8s",
+                "redis"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-T81771",
+            "bug_id": "BUG-Y3WCW2",
+            "summary": "Users cannot log in via SSO; redirect loop observed.",
+            "impact": "Admin-only feature broken",
+            "detection": "Support ticket spike",
+            "root_cause": "Clock skew between app and IdP causing token validation failure.",
+            "resolution": "Enable NTP sync and validate token clock skew settings."
+        },
+        "resolution_logs": [
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error invalid_redirect_uri",
+            "[nginx] 413 Request Entity Too Large while reading client request body",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[grafana] Failed to save dashboard: context deadline exceeded"
+        ],
+        "limitations": [
+            "Some clients cache redirect URIS clear browser cache after changes.",
+            "If multiple proxies exist, all must preserve X-Forwarded-* headers."
+        ],
+        "config_changes": {
+            "KC_HOSTNAME": "https://auth.example.com",
+            "PROXY_ADDRESS_FORWARDING": "true",
+            "X-Forwarded-Proto": "https"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2401,
+            "helpful_votes": 63,
+            "not_helpful_votes": 120,
+            "avg_time_on_page_sec": 56.8,
+            "search_hits": 1019
+        }
+    },
+    {
+        "kb_id": "KB-R86JM0",
+        "title": "HAProxy: Email - Emails land in spam due to missing SPF/DKIM",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "Email",
+            "severity": "SEV-4",
+            "environment": "dev",
+            "status": "Monitoring",
+            "created": "2026-01-28T16:00:00Z",
+            "updated": "2025-08-21T17:40:00Z",
+            "tags": [
+                "email",
+                "haproxy",
+                "sso"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-HJK76G",
+            "bug_id": "BUG-BGEK75",
+            "summary": "Password reset emails not delivered; connection timeout.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "User reports",
+            "root_cause": "SMTP provider enforces FROM domain; app configured with different sender.",
+            "resolution": "Open outbound SMTP port or use provider relay."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300",
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[keycloak] WARN [org.keycloak.events] type=LOGIN_ERROR, error=invalid_redirect_uri"
+        ],
+        "limitations": [
+            "Some providers rewrite envelope sender test end-to-end.",
+            "SPF/DKIM may take hours to propagate."
+        ],
+        "config_changes": {
+            "SMTP_FROM": "noreply@example.com",
+            "SMTP_HOST": "smtp.provider.tld",
+            "SPF": "v=spf1 include: provider.tld -all"
+        },
+        "system_architecture": {
+            "pattern": "Single VM + Reverse Proxy",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db"
+            ]
+        },
+        "usage_metrics": {
+            "views": 1552,
+            "helpful_votes": 382,
+            "not_helpful_votes": 15,
+            "avg_time_on_page_sec": 233.5,
+            "search_hits": 595
+        }
+    },
+    {
+        "kb_id": "KB-XHV8YV",
+        "title": "Firefly III: Security - TLS handshake fails",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Security",
+            "severity": "SEV-2",
+            "environment": "staging",
+            "status": "Resolved",
+            "created": "2025-12-03T14:59:00Z",
+            "updated": "2025-11-18T07:45:00Z",
+            "tags": [
+                "firefly-iii",
+                "security",
+                "tls"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-ZEH1W9",
+            "bug_id": "BUG-PYM3SW",
+            "summary": "HSTS causes downgrade issues after cert renewal.",
+            "impact": "Intermittent errors affecting -10% requests",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Admin interface bound to 0.0.0.0 and exposed via proxy.",
+            "resolution": "Update TLS config to modern ciphers and TLS1.2+."
+        },
+        "resolution_logs": [
+            "[smtp] 550 5.7.1 Sender address rejected: not owned by user",
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[postgres] FATAL: password authentication failed for user",
+            "[nginx] 413 Request Entity Too Large while reading client request body"
+        ],
+        "limitations": [
+            "IP allowlists require stable source IPs or VPN.",
+            "TLS changes can break legacy clients; verify compatibility."
+        ],
+        "config_changes": {
+            "TLS_MIN_VERSION": "TLSv1.2",
+            "ADMIN_IP_ALLOWLIST": "203.0.113.0/24",
+            "HSTS": "max-age=31536000"
+        },
+        "system_architecture": {
+            "pattern": "Kubernetes",
+            "nodes": [
+                "ingress (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "observability (Metrics/Observability)"
+            ],
+            "edges": [
+                "ingress -> app",
+                "app -> db",
+                "observability -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 771,
+            "helpful_votes": 678,
+            "not_helpful_votes": 13,
+            "avg_time_on_page_sec": 27.5,
+            "search_hits": 740
+        }
+    },
+    {
+        "kb_id": "KB-METFOS",
+        "title": "HAProxy: Upgrade - Upgrade completes but service fails health checks",
+        "metadata": {
+            "product": "HAProxy",
+            "category": "Upgrade",
+            "severity": "SEV-4",
+            "environment": "prod",
+            "status": "Monitoring",
+            "created": "2025-12-11T23:38:00Z",
+            "updated": "2025-09-06T08:49:00Z",
+            "tags": [
+                "haproxy",
+                "header",
+                "redis",
+                "upgrade"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-IZSWZ3",
+            "bug_id": "BUG-IRLBXW",
+            "summary": "Containers restart in a loop after image update.",
+            "impact": "Partial outage for SSO users only",
+            "detection": "User reports",
+            "root_cause": "Old database schema incompatible; migrations not run.",
+            "resolution": "Apply config migration notes; replace deprecated env vars."
+        },
+        "resolution_logs": [
+            "[haproxy] backend/app_server: Server appl is DOWN, reason: Layer7 timeout, check duration: 300",
+            "[grafana] Failed to save dashboard: context deadline exceeded",
+            "[app] ERROR: Token validation failed: 'iss' claim mismatch"
+        ],
+        "limitations": [
+            "Rollback plan required; DB schema may be forward-only.",
+            "Config changes differ by major version read release notes."
+        ],
+        "config_changes": {
+            "BACKUP_BEFORE_UPGRADE": "true",
+            "MIGRATIONS": "run-once",
+            "IMAGE_TAG": "pinned"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 2060,
+            "helpful_votes": 1854,
+            "not_helpful_votes": 130,
+            "avg_time_on_page_sec": 24.4,
+            "search_hits": 421
+        }
+    },
+    {
+        "kb_id": "KB-15MC9Q",
+        "title": "Firefly III: Security - TLS handshake fails",
+        "metadata": {
+            "product": "Firefly III",
+            "category": "Security",
+            "severity": "SEV-1",
+            "environment": "prod",
+            "status": "Known Issue",
+            "created": "2026-01-09T07:17:00Z",
+            "updated": "2025-08-16T20:18:00Z",
+            "tags": [
+                "docker",
+                "firefly-iii",
+                "mysql",
+                "security",
+                "tls"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-L8KP8Q",
+            "bug_id": "BUG-PDKWWO",
+            "summary": "Admin endpoint exposed unintentionally on WAN.",
+            "impact": "Admin-only feature broken",
+            "detection": "Synthetic monitoring alert",
+            "root_cause": "Cert chain incomplete; missing intermediate CA.",
+            "resolution": "Update TLS config to modern ciphers and TLS1.2+."
+        },
+        "resolution_logs": [
+            "[gitlab] 502 Bad Gateway: Puma timed out",
+            "[postgres] FATAL: password authentication failed for user",
+            "[browser] NS_ERROR_CORRUPTED_CONTENT on monaco-language-client.js",
+            "[docker] network <kb_net> has conflicting subnet; cannot create"
+        ],
+        "limitations": [
+            "TLS changes can break legacy clients verify compatibility.",
+            "IP allowlists require stable source IPs or VPN."
+        ],
+        "config_changes": {
+            "TLS_MIN_VERSION": "TLSv1.2",
+            "HSTS": "max-age=31536000",
+            "ADMIN_IP_ALLOWLIST": "203.0.113.0/24"
+        },
+        "system_architecture": {
+            "pattern": "Docker Compose (multi-service)",
+            "nodes": [
+                "haproxy (Reverse Proxy)",
+                "app (App Server)",
+                "db (Database)",
+                "cache (Cache)",
+                "metrics (Metrics/Observability)"
+            ],
+            "edges": [
+                "haproxy -> app",
+                "app -> db",
+                "app -> cache",
+                "metrics -> app"
+            ]
+        },
+        "usage_metrics": {
+            "views": 186,
+            "helpful_votes": 2,
+            "not_helpful_votes": 119,
+            "avg_time_on_page_sec": 238.2,
+            "search_hits": 994
+        }
+    },
+    {
+        "kb_id": "KB-0J3WZB",
+        "title": "Database Connection Failure in Eclipse Application",
+        "metadata": {
+            "product": "eclipse",
+            "category": "Database Connectivity",
+            "severity": "SEV-1",
+            "environment": "prod",
+            "status": "Resolved",
+            "created": "2026-02-14T12:00:00Z",
+            "updated": "2026-02-14T12:00:00Z",
+            "tags": [
+                "database",
+                "authentication",
+                "java",
+                "connection-pool",
+                "prod-outage"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-YTWNKT",
+            "bug_id": "BUG-GEN",
+            "summary": "Java application failed to establish database connections due to authentication errors, causing service degradation.",
+            "impact": "Partial outage: Application read/write operations were intermittently failing, affecting 100% of users.",
+            "detection": "Automated alerts from application logs (JDBC connection failures) and database server authentication audit logs.",
+            "root_cause": "Incorrect database credentials were configured in the application connection pool.",
+            "resolution": "Updated the application configuration with valid database credentials and verified successful connection establishment."
+        },
+        "resolution_logs": [],
+        "limitations": [
+            "Credentials must be manually rotated in all environments when database passwords expire.",
+            "Connection pool may require restart to apply credential changes, causing brief service disruption."
+        ],
+        "config_changes": {},
+        "system_architecture": {
+            "nodes": [
+                "Client",
+                "Load Balancer",
+                "Java Application",
+                "Database Connection Pool",
+                "Database Server"
+            ],
+            "edges": [
+                "Client -> Load Balancer",
+                "Load Balancer -> Java Application",
+                "Java Application -> Database Connection Pool",
+                "Database Connection Pool -> Database Server"
+            ]
+        },
+        "usage_metrics": {
+            "views": 0,
+            "helpful_votes": 0,
+            "not_helpful_votes": 0,
+            "avg_time_on_page_sec": 0,
+            "search_hits": 0
+        }
+    },
+    {
+        "kb_id": "KB-JAEBDF",
+        "title": "404 Not Found Error on Web Application",
+        "metadata": {
+            "product": "web",
+            "category": "Application Routing",
+            "severity": "SEV-1",
+            "environment": "prod",
+            "status": "Resolved",
+            "created": "2026-02-14T12:00:00Z",
+            "updated": "2026-02-14T12:00:00Z",
+            "tags": [
+                "routing",
+                "404",
+                "web-errors",
+                "application-restart"
+            ]
+        },
+        "incident": {
+            "incident_id": "INC-RS6GV3",
+            "bug_id": "BUG-GEN",
+            "summary": "Users reported 404 Not Found errors when attempting to access the web application, indicating routing failures.",
+            "impact": "Partial outage affecting all users attempting to access the application via web.",
+            "detection": "Automated monitoring alerts triggered due to increased HTTP 404 response rates.",
+            "root_cause": "The application routing layer failed due to a misconfiguration in the route definitions, causing the web server to return 404 errors for valid paths.",
+            "resolution": "Identified and corrected the routing misconfiguration, then restarted the web application to apply changes."
+        },
+        "resolution_logs": [],
+        "limitations": [
+            "Restarting the application may cause brief downtime for users.",
+            "The fix does not address underlying issues that may cause similar routing misconfigurations in the future."
+        ],
+        "config_changes": {},
+        "system_architecture": {
+            "description": "Client -> Load Balancer -> Web Server (Application) -> Database",
+            "components": [
+                {
+                    "name": "Client",
+                    "role": "Initiates HTTP requests to the web application."
+                },
+                {
+                    "name": "Load Balancer",
+                    "role": "Distributes incoming traffic across multiple web servers."
+                },
+                {
+                    "name": "Web Server",
+                    "role": "Hosts the web application and handles routing logic."
+                },
+                {
+                    "name": "Database",
+                    "role": "Stores application data accessed by the web server."
+                }
+            ]
+        },
+        "usage_metrics": {
+            "views": 0,
+            "helpful_votes": 0,
+            "not_helpful_votes": 0,
+            "avg_time_on_page_sec": 0,
+            "search_hits": 0
+        }
+    }
+]
